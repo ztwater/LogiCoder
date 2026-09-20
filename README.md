@@ -55,7 +55,7 @@ The fused results form the prompt for augmented generation with LLMs.
 ## Project Structure
 
 ```
-LogiCoder-src/
+LogiCoder/
 ├── logicoder.py                     # Main pipeline: UsageExampleRetriever + prompt building
 ├── build_call_graph.py              # Dependency graph construction (pyan-based)
 ├── extract_function.py              # LCE: candidate callee extraction
@@ -91,7 +91,7 @@ LogiCoder-src/
 ## Requirements
 
 ### Hardware
-- **GPU**: Required only for local model inference or UniXcoder embeddings (8GB+ VRAM recommended). The retrieval pipeline runs on CPU.
+- **GPU**: Required only for local model inference or UniXcoder embeddings (24GB+ VRAM recommended). The retrieval pipeline runs on CPU.
 - **Storage**: ~80GB for repositories, embeddings, and cached results
 - **RAM**: 32GB+ recommended
 
@@ -106,8 +106,8 @@ LogiCoder-src/
 ```bash
 # 1. Install DevEval/CoderEval Environment
 
-# 2. Clone and copy `LogiCoder-src` to the root directory of the project, e.g., DevEval
-cd LogiCoder-src
+# 2. Clone and copy `LogiCoder` to the root directory of the project, e.g., DevEval
+cd LogiCoder
 
 # 3. Install required dependencies
 pip install -r requirements.txt
@@ -232,11 +232,12 @@ python function_retrieval_pipeline.py  # Sparse Retrieval, Dense Retrieval
 # Static-analysis-enhanced baselines (prompts from external build pipelines)
 # DraCo, GraphCoder, RepoScope: each has its own prompt preparation process; 
 # see their respective papers/repos for detail.
-python build_prompt.py                 # Also generates prompts for Draco and GraphCoder-cf subset
 
-# Agent-based baseline
-python mini-swe-agent_interface.py     # CodeAgent with LangChain
+# Agent-based baselines
+# CodeAgent has its own prompt process, see its their respective papers/repos for detail.
+python mini-swe-agent_interface.py     # Mini-SWE-Agent interface
 python opencode_interface.py           # OpenCode interface
+
 ```
 
 ### LLM Inference
